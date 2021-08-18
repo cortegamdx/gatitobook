@@ -1,0 +1,81 @@
+<h4 class="text-center">Registre-se e mostre seu pet pro mundo!</h4>
+<form
+  action=""
+  class="form mt-4"
+  [formGroup]="novoUsuarioForm"
+  (submit)="cadastrar()"
+>
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="E-mail"
+      formControlName="email"
+    />
+  </div>
+  <app-mensagem
+    mensagem="E-mail obrigatorio"
+    *ngIf="
+      novoUsuarioForm.get('email')?.errors?.required &&
+      novoUsuarioForm.get('email')?.touched
+    "
+  ></app-mensagem>
+  <app-mensagem
+    mensagem="E-mail no formato incorreto"
+    *ngIf="
+      novoUsuarioForm.get('email')?.errors?.email &&
+      novoUsuarioForm.get('email')?.touched
+    "
+  ></app-mensagem>
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Nome completo"
+      formControlName="fullName"
+    />
+  </div>
+  <app-mensagem
+    mensagem="Nome incorreto"
+    *ngIf="
+      novoUsuarioForm.get('fullName')?.errors &&
+      novoUsuarioForm.get('fullName')?.touched
+    "
+  ></app-mensagem>
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Usuario"
+      formControlName="userName"
+    />
+  </div>
+  <app-mensagem
+    mensagem="Usuario deve ser em letra minuscula"
+    *ngIf="
+      novoUsuarioForm.get('userName')?.errors?.minusculo &&
+      novoUsuarioForm.get('userName')?.touched
+    "
+  ></app-mensagem>
+  <app-mensagem mensagem="Usuario ja existe"
+  *ngIf="
+      novoUsuarioForm.get('userName')?.errors?.usuarioExistente"
+  ></app-mensagem>
+  <div class="form-group">
+    <input
+      type="password"
+      class="form-control"
+      placeholder="Senha"
+      formControlName="password"
+    />
+    <app-mensagem *ngIf="novoUsuarioForm.errors?.senhaIgualUsuario"
+    mensagem="Senha deve ser diferente do usuario">
+
+    </app-mensagem>
+  </div>
+  <button type="submit" class="btn btn-primary btn-block">Cadastro</button>
+  <p>
+    Ja e um usuario ?
+    <a [routerLink]="['']">Faca login</a>
+  </p>
+</form>
